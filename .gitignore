@@ -1,0 +1,7 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+chatbot_rag_dados/
+data/index/
+.ipynb_checkpoints/

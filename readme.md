@@ -30,13 +30,35 @@ source .venv/bin/activate
 pip install -r requirements.txt
 Configuração (.env)
 
-Crie um arquivo .env na raiz do projeto:
+### Configuração (.env)
 
+Copie o arquivo de exemplo e preencha sua chave:
+
+```bash
+# Windows (PowerShell)
+copy .env.example .env
+# Linux/macOS
+cp .env.example .env
+```
+
+Conteúdo do `.env`:
+
+```
 GEMINI_API_KEY=sua_chave_aqui
 GEMINI_MODELS=gemini-3.5-flash-lite,gemini-3.1-flash-lite,gemini-3.5-flash,gemini-3.8-flash
-GEMINI_MODELS: lista de modelos em ordem de preferência. Se um modelo falhar (indisponível, cota diária esgotada ou aposentado), o agente passa para o próximo mantendo o histórico da conversa. Os nomes de modelos do Gemini mudam com frequência; confira os disponíveis para a sua chave na documentação do Google e ajuste a lista se necessário.
-TODAY_OVERRIDE (opcional, formato AAAA-MM-DD): força a data "de hoje" usada pelo agente. Veja a seção de suposições.
-Executar
+```
+
+- `GEMINI_API_KEY`: sua chave da API do Gemini (obrigatória). Gere uma
+  gratuita no [Google AI Studio](https://aistudio.google.com/apikey).
+- `GEMINI_MODELS`: lista de modelos em ordem de preferência. Se um modelo
+  falhar (indisponível, cota diária esgotada ou aposentado), o agente passa
+  para o próximo mantendo o histórico da conversa. Os nomes de modelos do
+  Gemini mudam com frequência; confira os disponíveis para a sua chave na
+  documentação do Google e ajuste a lista se necessário.
+- `TODAY_OVERRIDE` (opcional, formato AAAA-MM-DD): força a data "de hoje"
+  usada pelo agente. Veja a seção "Suposições assumidas".
+
+### Executar
 bash
 # Interface web
 streamlit run app.py
@@ -54,7 +76,7 @@ Estrutura do projeto
 ├── data/                   # CSVs e PDF de políticas
 ├── examples/               # Conversas de exemplo
 └── src/
-    ├── viewer.ipynb        # serve para vizualizar os dados 
+    ├── viewer.ipynb        # serve para visualizar os dados, não tem nenhum efeito prático no projeto e se for retirado não afeta o resultado final 
     ├── data_loader.py      # Carga dos CSVs
     ├── data_tools.py       # Ferramentas de consulta e tratamento de dados (produtos, promoções, pedidos)
     └── agent.py            # Prompt, persona, loop de function calling e fallback de modelos
